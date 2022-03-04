@@ -1,0 +1,20 @@
+{% extends "home/base.html" %}
+{% block content %}
+    {% for vehicle in vehicles %}
+        <article class="media content-section">
+          <div class="media-body">
+            <div class="article-metadata">
+              <!-- <a class="mr-2" href="#">{{ vehicle.vehicle_name }}</a> -->
+              <small class="text-muted">{{ vehicle.created_at }}</small>
+            </div>
+            <h2><a class="article-title" href="#">{{ vehicle.vehicle_name }}</a></h2>
+            <p class="article-content">{{ vehicle.desc }}</p>
+            <p class="article-content">{{ vehicle.model_name }}</p>
+            <p class="article-content">{{ vehicle.production_year }}</p>
+            <p class="article-content">{{ vehicle.available_seat }}</p>
+            <plass="article-content">{{ vehicle.vehicle_color }}</p>
+            <plass="article-content">{{ vehicle.license_plate }}</p>
+          </div>
+        </article>
+    {% endfor %}
+{% endblock content %}
