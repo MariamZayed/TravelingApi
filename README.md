@@ -23,4 +23,4 @@ You shall find these folders (Scripts, Lib) and (pyvenv.cfg) file <br>
 `py -m pip install Django`
 
 3. Run the server
-`python manage.py runserver'
+`python manage.py runserver`
