@@ -24,5 +24,3 @@ You shall find these folders (Scripts, Lib) and (pyvenv.cfg) file <br>
 
 3. Run the server
 `python manage.py runserver'
-
-`
