@@ -22,12 +22,13 @@ INSTALLED_APPS = [
     'home.apps.HomeConfig', #add this so that django search for templates we made whenever we render the home page
     'users.apps.UsersConfig',
     'travel_api.apps.TravelApiConfig',
+    'rest_framework',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
-    'django.contrib.staticfiles'
+    'django.contrib.staticfiles',
 ]
 
 MIDDLEWARE = [
@@ -114,3 +115,9 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 AUTH_USER_MODEL = 'users.NewUser'
+
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.AllowAny',
+    ]
+}

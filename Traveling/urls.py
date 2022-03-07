@@ -10,6 +10,6 @@ urlpatterns = [
                                     #whenever there's a url whis 127.0.01/ -is the root-, go to the home apllication and search for the url file => url.py
                                     #include function ensure it's another application in the same project
     path('register/', users_views.register, name='register'),
-    # path('api/', include('travel_api.url', namespace='travel_api')),
+    path('api/', include('travel_api.urls', namespace='travel_api')),
 
 ]
