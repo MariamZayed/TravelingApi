@@ -24,3 +24,11 @@ You shall find these folders (Scripts, Lib) and (pyvenv.cfg) file <br>
 
 3. Run the server
 `python manage.py runserver`
+
+4. install django restframework for APIs <br>
+   - type this command `pip install djangorestframework`<br>
+<p>You can route to the apis in next urls to:<br>
+i. post ar retrieve all data from the DB<br>
+http://127.0.0.1:8000/api<br>
+ii. retrieve or delte certian item, trip id 1 for ex<br>
+http://127.0.0.1:8000/api/1 </p>
