@@ -32,7 +32,7 @@ class CustomAccountManager(BaseUserManager):
         user.save()
         return user
 
-class NewUser(AbstractBaseUser, PermissionsMixin):
+class NewUser(AbstractBaseUser, PermissionsMixin):#AbstractBaseUser makes us to override the old user yable, and PermissionsMixin for permissions 
 
     username = models.CharField(max_length=150, unique=True)
     email = models.EmailField(_('email address'), unique=True)
@@ -43,11 +43,12 @@ class NewUser(AbstractBaseUser, PermissionsMixin):
     birthdate = models.CharField(max_length=10, blank=True) 
     start_date = models.DateTimeField(default=timezone.now)
     is_staff = models.BooleanField(default=False)
-    is_active = models.BooleanField(default=False)
+    is_active = models.BooleanField(default=False)#we're making this false untill he cheks his email and confirm thrn it would be active
 
-    objects = CustomAccountManager()
-    USERNAME_FIELD='email'
-    REQUIRED_FIELDS = ['username', 'first_name']
+    objects = CustomAccountManager()#this object to handle normal and superusers
+
+    USERNAME_FIELD='email' 
+    REQUIRED_FIELDS = ['username', 'first_name'] # thoes two lines are madentory when changing the USERNAME_FIELD
 
     def __str__(self):
         return self.username

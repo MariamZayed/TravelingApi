@@ -34,8 +34,10 @@ class Trip(models.Model):
     created_at = models.DateTimeField(default=timezone.now)
     status = models.CharField(max_length=10, choices=options, default='processing') 
     vehicle = models.ForeignKey(Vehicle, on_delete=models.CASCADE, default=1)#, null=True
-    user = models.ForeignKey(NewUser, on_delete=models.CASCADE, default=1)#, null=True
-    objects = CustomAccountManager()  # default manager
+    user = models.ForeignKey(NewUser, on_delete=models.CASCADE)#, null=True # we made both fk defaul 1, we're going to change taht later
+    
+    # objects = CustomAccountManager()  # default manager
+    objects = models.Manager()
     tripobjects = TripObjects()  # custom manager
     # tripname =tripobjects.filter(src=src,dest=dest).query
 

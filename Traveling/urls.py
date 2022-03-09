@@ -11,5 +11,6 @@ urlpatterns = [
                                     #include function ensure it's another application in the same project
     path('register/', users_views.register, name='register'),
     path('api/', include('travel_api.urls', namespace='travel_api')),
+    path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),#this to simualte login-system for user
 
 ]
