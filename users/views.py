@@ -1,17 +1,23 @@
-from django.shortcuts import render, redirect
-# from django.contrib import messages
-from .forms import UserRegisterForm
+from rest_framework import status
+from rest_framework.response import Response
+from rest_framework.views import APIView #this is new!first time to use
+from .serializers import RegisterUserSerializer #we created this to specify what to serialize to save in DB
+from rest_framework.permissions import AllowAny
+# from rest_framework_simplejwt.tokens import RefreshToken
+# from rest_framework_simplejwt.views import TokenObtainPairView
 
-def register(request):
-    if request.method == 'POST': ##if there is a data sent from the form then
-        form = UserRegisterForm(request.POST) ###store it in the form variable
-        if form.is_valid(): ####if it staisfes the validation form
-            form.save()     #####then save this user in the db
-            username = form.cleaned_data.get('username')
-            # messages.success(request, f'Account created for {username}!') ##this is a flash message to be shown in frontend
-            return redirect('home-home') #####congrats, go to the home page
-    else:
-        form = UserRegisterForm() ##create a blank form if the user didnt send any posted data, return this blank form to register.html
-    return render(request, 'users/register.html', {'form': form})## return the form you have if the user didnt successed to sign up, 
-                                                                 ## either he didnt post a dtat in the form,or posted invalied data
- 
+
+class CustomUserRegister(APIView):
+    permission_classes = [AllowAny] #AllowAny because of when to register, it should be allowed to anyone
+    
+    def post(self, request):
+        reg_serializer = RegisterUserSerializer(data=request.data)#this's a fun we created in serializer.py#fetch all data from request
+        if reg_serializer.is_valid(): ####if it staisfes the serializer form
+            newuser = reg_serializer.save() #####then save this user in the db
+            if newuser: #if true
+                # json = reg_serializer.data 
+                return Response(status=status.HTTP_201_CREATED)#then return response with the json data and congratualtions, we're done!
+        return Response(reg_serializer.errors, status=status.HTTP_400_BAD_REQUEST)#if the first if is false, continue and come here, send 400 :'(
+
+
+##here was an old code, you can fin it in the other repo https://github.com/MariamZayed/travel-app-workshop

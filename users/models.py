@@ -43,11 +43,11 @@ class NewUser(AbstractBaseUser, PermissionsMixin):#AbstractBaseUser makes us to 
     birthdate = models.CharField(max_length=10, blank=True) 
     start_date = models.DateTimeField(default=timezone.now)
     is_staff = models.BooleanField(default=False)
-    is_active = models.BooleanField(default=False)#we're making this false untill he cheks his email and confirm thrn it would be active
+    is_active = models.BooleanField(default=False)#we're making this false untill he checks his email and confirm thrn it would be active
 
     objects = CustomAccountManager()#this object to handle normal and superusers
 
-    USERNAME_FIELD='email' 
+    USERNAME_FIELD='email' #we're going to use email for tokens (authentication) not the username as defualt django
     REQUIRED_FIELDS = ['username', 'first_name'] # thoes two lines are madentory when changing the USERNAME_FIELD
 
     def __str__(self):
