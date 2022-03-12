@@ -8,7 +8,7 @@
 
 ## steps to clone the repo
 
-1. **MUST** create a virtual environment, for any different OS
+1. **MUST** create a virtual environment for any OS
 - for Windows users, after making sure of having python and pip installed, do the following
    - a. open the cmd and install virtualenv package
 `pip install virtualenv`
@@ -25,8 +25,9 @@ You shall find these folders (Scripts, Lib) and (pyvenv.cfg) file <br>
 3. Run the server
 `python manage.py runserver`
 
-4. install django restframework for APIs <br>
-   - type this command `pip install djangorestframework`<br>
+4. install django restframework for APIs and JWT Authentications<br>
+   - use this command `pip install djangorestframework-simplejwt`<br> <br>
+  
 <p>You can route to the apis in next urls to:<br>
 i. post ar retrieve all data from the DB<br>
 http://127.0.0.1:8000/api<br>
