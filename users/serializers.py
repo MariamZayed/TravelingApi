@@ -8,7 +8,7 @@ class RegisterUserSerializer(serializers.ModelSerializer):#he says it's customed
         model = NewUser
         exclude = ('start_date','is_staff','is_active') #https://stackoverflow.com/questions/38245414/django-rest-framework-how-to-include-all-fields-and-a-related-field-in-mo
  #bcause its what're required to register
-        extra_kwargs = {'password': {'write_only': True}} # for security matter
+        # extra_kwargs = {'password': {'write_only': True}} # for security matter
 
     def create(self, validated_data):
         password = validated_data.pop('password', None)

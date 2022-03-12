@@ -1,7 +1,8 @@
-from rest_framework import generics # it's going to help us user the coming functions to get post delete and so on
+from rest_framework import generics # it's going to help us user the coming functions to CRUD
 from home.models import Trip
 from .serializers import TripSerializer
-from rest_framework.permissions import SAFE_METHODS, BasePermission, IsAdminUser, AllowAny, DjangoModelPermissionsOrAnonReadOnly,DjangoModelPermissions
+from rest_framework import permissions
+from rest_framework.permissions import SAFE_METHODS, BasePermission
 
 ##this class is from the documention :D
 class IsOwnerOrReadOnly(BasePermission):
@@ -10,7 +11,7 @@ class IsOwnerOrReadOnly(BasePermission):
     Assumes the model instance has an `user` attribute.
     """
     
-    message = 'Editing post is restricted to author only.' #when exception raise up, this message will show up
+    message = 'Editing trip is restricted to author only.' #when exception raise up, this message will show up
     def has_object_permission(self, request, view, obj):
         # Read permissions are allowed to any request,
         # so we'll always allow GET, HEAD or OPTIONS requests.
@@ -20,20 +21,52 @@ class IsOwnerOrReadOnly(BasePermission):
         return obj.user == request.user
 
 
+# Display Trips
 
-class TripList(generics.ListCreateAPIView):# this one to create or list *all* items(get and post)
-    permission_classes = [DjangoModelPermissions]# so adding this permission means authenticated users can view and make posts for ex
+class TripList(generics.ListAPIView):# this one to list *all* trips -obj- by anyone
     queryset = Trip.objects.all()
     serializer_class = TripSerializer
 
 
-class TripDetail(generics.RetrieveUpdateDestroyAPIView):# this one to edit and delete #we need the user of the post to edit or delete, not anyone else#if he visit  api/1 he can read it only
-    permission_classes = [IsOwnerOrReadOnly] #this is the class we made above
+class TripDetail(generics.RetrieveAPIView):#show single trip -endpoint-, api/1 can read only by anyone
     queryset = Trip.objects.all()
     serializer_class = TripSerializer
 
-#Generics Function
-""" Concrete View Classes
+
+# Trip Admin CRUD
+
+class CreateTrip(generics.CreateAPIView):
+    permission_classes = [permissions.IsAuthenticated]
+    queryset = Trip.objects.all()
+    serializer_class = TripSerializer
+
+class AdminTripDetail(generics.RetrieveAPIView): #we need to retrieve all trips to edit them, it's not the optimal thing, but we want to seperate 
+    permission_classes = [permissions.IsAuthenticated]
+    queryset = Trip.objects.all()
+    serializer_class = TripSerializer
+
+class EditTrip(generics.UpdateAPIView):
+    permission_classes = [permissions.IsAuthenticated]
+    queryset = Trip.objects.all()
+    serializer_class = TripSerializer
+
+class DeleteTrip(generics.RetrieveDestroyAPIView):
+    permission_classes = [permissions.IsAuthenticated]
+    queryset = Trip.objects.all()
+    serializer_class = TripSerializer
+
+
+
+
+
+
+
+
+
+
+
+
+""" Concrete View Classes #Generics Function
 #CreateAPIView
 Used for create-only endpoints.
 #ListAPIView
@@ -55,3 +88,4 @@ Used for read or delete endpoints to represent a single model instance.
   # حدي بالك مش هينفع نستخدمها الا اذا عملنا لوج ان سيستم وان اليوزر الي عمل البوست مثلا هو بس الي هيعدل عليه
 Used for read-write-delete endpoints to represent a single model instance.
 """
+

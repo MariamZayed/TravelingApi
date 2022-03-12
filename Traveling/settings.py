@@ -31,11 +31,13 @@ INSTALLED_APPS = [
     'travel_api.apps.TravelApiConfig',
     'rest_framework',
     'rest_framework_simplejwt.token_blacklist',
+    "corsheaders",
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    "corsheaders.middleware.CorsMiddleware",
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -132,8 +134,8 @@ REST_FRAMEWORK = {
 SIMPLE_JWT = {
     'ACCESS_TOKEN_LIFETIME': timedelta(minutes=5),  ##this
     'REFRESH_TOKEN_LIFETIME': timedelta(days=1),    ##this
-    'ROTATE_REFRESH_TOKENS': True,  #set this to true for the front machine
-    'BLACKLIST_AFTER_ROTATION': True,   #set this to true
+    'ROTATE_REFRESH_TOKENS': True,  #set this to true for the front machine, this's activated when refresh token gets expire, so when this fires up it's renewed expiration time with new refresh token will be returned along with the new access token
+    'BLACKLIST_AFTER_ROTATION': True,   #set this to true. causes refresh tokens submitted to the TokenRefreshView to be added to the blacklist if the blacklist app is in use, it goe swhen usre logout, so the refresh and access no longer works
     'UPDATE_LAST_LOGIN': False,
 
     'ALGORITHM': 'HS256',
@@ -160,3 +162,10 @@ SIMPLE_JWT = {
     'SLIDING_TOKEN_LIFETIME': timedelta(minutes=5),
     'SLIDING_TOKEN_REFRESH_LIFETIME': timedelta(days=1),
 }
+
+CORS_ALLOWED_ORIGINS = [
+    # "https://example.com",
+    # "https://sub.example.com",
+    "http://localhost:3000",
+    # "http://127.0.0.1:9000",
+]
