@@ -1,12 +1,12 @@
 # TravelingApi
 
-# requirements
+# **Requirements**
 
 - python 3.7.0
 - latest pip version (in my case pip 22.0.3)
 - latest Django version (in my case Django 3.2.12)
 
-## steps to clone the repo
+## Steps to clone the repo
 
 1. **MUST** create a virtual environment for any OS
 - for Windows users, after making sure of having python and pip installed, do the following
@@ -26,10 +26,18 @@ You shall find these folders (Scripts, Lib) and (pyvenv.cfg) file <br>
 `python manage.py runserver`
 
 4. install django restframework for APIs and JWT Authentications<br>
-   - use this command `pip install djangorestframework-simplejwt`<br> <br>
-  
-<p>You can route to the apis in next urls to:<br>
-i. post ar retrieve all data from the DB<br>
+    `pip install djangorestframework-simplejwt`<br>
+    
+5. install django-cors-headers <br>
+   `pip install django-cors-headers`<br>
+   CORS is a mechanism to allow interaction with resources hosted on different domains. In my case for example, React app <br>
+   you can read more here: https://www.stackhawk.com/blog/django-cors-guide/
+ 
+## API Documentation 
+
+<p>I'll put more detailed documention for APIs later, meanwhile, for instance you can route to the apis in next urls to:<br>
+i. retrieve all data from the DB<br>
 http://127.0.0.1:8000/api<br>
-ii. retrieve or delte certian item, trip id 1 for ex<br>
+ii. retrieve single trip, using trip id as and endpoint<br>
 http://127.0.0.1:8000/api/1 </p>
+
