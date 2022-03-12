@@ -31,7 +31,7 @@ You shall find these folders (Scripts, Lib) and (pyvenv.cfg) file <br>
    you can read more here: https://www.stackhawk.com/blog/django-cors-guide/
 
 5. run migration to handle the models
-   -  `python manage.py makemigration`
+   -  `python manage.py makemigrations`
    -  `python manage.py migrate`
 
 6. Finally, Run the server <br>
