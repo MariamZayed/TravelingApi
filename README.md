@@ -22,17 +22,22 @@ You shall find these folders (Scripts, Lib) and (pyvenv.cfg) file <br>
 2. After creating virtual env, install Django 
 `py -m pip install Django`
 
-3. Run the server
-`python manage.py runserver`
-
-4. install django restframework for APIs and JWT Authentications<br>
+3. install django restframework for APIs and JWT Authentications<br>
     `pip install djangorestframework-simplejwt`<br>
     
-5. install django-cors-headers <br>
+4. install django-cors-headers <br>
    `pip install django-cors-headers`<br>
    CORS is a mechanism to allow interaction with resources hosted on different domains. In my case for example, React app <br>
    you can read more here: https://www.stackhawk.com/blog/django-cors-guide/
- 
+
+5. run migration to handle the models
+   -  `python manage.py makemigration`
+   -  `python manage.py migrate`
+
+6. Finally, Run the server <br>
+`python manage.py runserver`
+
+
 ## API Documentation 
 
 <p>I'll put more detailed documention for APIs later, meanwhile, for instance you can route to the apis in next urls to:<br>
